@@ -1,0 +1,2289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PackGenie | Right Food. Right Pack. Right Choice.</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+:root{
+    --green:#08783f;
+    --green2:#20b866;
+    --dark:#073d27;
+    --light:#f2fbf6;
+    --white:#ffffff;
+    --text:#18352a;
+    --muted:#6b7c73;
+    --border:#dcebe3;
+    --gold:#f4b942;
+    --red:#dc4b4b;
+}
+
+body{
+    background:#f5faf7;
+    color:var(--text);
+}
+
+/* ================================
+   AUTH SCREEN
+================================ */
+
+.auth-screen{
+    min-height:100vh;
+    display:flex;
+    background:
+        linear-gradient(135deg,#e9f9f0,#ffffff 55%,#dff5e8);
+}
+
+.auth-left{
+    width:55%;
+    padding:70px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:28px;
+    font-weight:800;
+    color:var(--green);
+}
+
+.logo{
+    width:48px;
+    height:48px;
+    border-radius:14px;
+    background:var(--green);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:25px;
+}
+
+.auth-left h1{
+    font-size:54px;
+    line-height:1.05;
+    color:var(--dark);
+    margin:35px 0 20px;
+}
+
+.auth-left h1 span{
+    color:var(--green2);
+}
+
+.auth-left p{
+    max-width:620px;
+    font-size:18px;
+    line-height:1.7;
+    color:var(--muted);
+}
+
+.features{
+    display:flex;
+    gap:15px;
+    margin-top:35px;
+    flex-wrap:wrap;
+}
+
+.feature{
+    background:white;
+    padding:14px 18px;
+    border-radius:12px;
+    border:1px solid var(--border);
+    font-size:14px;
+    font-weight:600;
+}
+
+.auth-right{
+    width:45%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:40px;
+}
+
+.auth-card{
+    width:100%;
+    max-width:470px;
+    background:white;
+    border-radius:25px;
+    padding:38px;
+    box-shadow:0 20px 60px rgba(0,80,40,.12);
+    border:1px solid var(--border);
+}
+
+.auth-card h2{
+    font-size:28px;
+    color:var(--dark);
+    margin-bottom:8px;
+}
+
+.auth-card .sub{
+    color:var(--muted);
+    margin-bottom:25px;
+}
+
+.auth-tabs{
+    display:flex;
+    background:#eef7f2;
+    padding:5px;
+    border-radius:12px;
+    margin-bottom:25px;
+}
+
+.auth-tabs button{
+    width:50%;
+    padding:12px;
+    border:0;
+    background:transparent;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:700;
+    color:var(--muted);
+}
+
+.auth-tabs button.active{
+    background:white;
+    color:var(--green);
+    box-shadow:0 3px 10px rgba(0,0,0,.06);
+}
+
+.form-group{
+    margin-bottom:17px;
+}
+
+.form-group label{
+    display:block;
+    font-size:14px;
+    font-weight:700;
+    margin-bottom:7px;
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+    padding:14px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    outline:none;
+    background:#fbfdfc;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+    border-color:var(--green2);
+}
+
+.primary-btn{
+    width:100%;
+    padding:15px;
+    border:0;
+    border-radius:11px;
+    background:var(--green);
+    color:white;
+    font-size:16px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.primary-btn:hover{
+    background:#056333;
+}
+
+.demo-note{
+    text-align:center;
+    margin-top:16px;
+    font-size:12px;
+    color:var(--muted);
+}
+
+/* ================================
+   APP
+================================ */
+
+.app{
+    display:none;
+    min-height:100vh;
+}
+
+.sidebar{
+    width:250px;
+    background:#073d27;
+    color:white;
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    padding:25px 15px;
+    z-index:10;
+}
+
+.sidebar-brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px;
+    margin-bottom:30px;
+}
+
+.sidebar-brand .logo{
+    width:40px;
+    height:40px;
+    font-size:20px;
+    background:#20b866;
+}
+
+.sidebar-brand span{
+    font-size:21px;
+    font-weight:800;
+}
+
+.menu-title{
+    font-size:11px;
+    color:#8bb6a1;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    padding:0 12px;
+    margin-bottom:8px;
+}
+
+.nav-btn{
+    width:100%;
+    padding:13px 14px;
+    margin:4px 0;
+    border:0;
+    border-radius:10px;
+    background:transparent;
+    color:#d8eee2;
+    text-align:left;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:600;
+}
+
+.nav-btn:hover,
+.nav-btn.active{
+    background:#126b43;
+    color:white;
+}
+
+.logout{
+    position:absolute;
+    bottom:25px;
+    left:15px;
+    right:15px;
+}
+
+.main{
+    margin-left:250px;
+    min-height:100vh;
+}
+
+.topbar{
+    height:72px;
+    background:white;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 35px;
+    position:sticky;
+    top:0;
+    z-index:5;
+}
+
+.topbar-title{
+    font-size:20px;
+    font-weight:800;
+    color:var(--dark);
+}
+
+.user-box{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:14px;
+    font-weight:600;
+}
+
+.avatar{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:#dff5e8;
+    color:var(--green);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:800;
+}
+
+.screen{
+    display:none;
+    padding:35px;
+    animation:fade .25s ease;
+}
+
+.screen.active{
+    display:block;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(5px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.page-heading{
+    margin-bottom:25px;
+}
+
+.page-heading h1{
+    color:var(--dark);
+    margin-bottom:7px;
+}
+
+.page-heading p{
+    color:var(--muted);
+}
+
+/* ================================
+   DASHBOARD
+================================ */
+
+.hero-dashboard{
+    background:linear-gradient(135deg,#08783f,#20b866);
+    border-radius:22px;
+    padding:35px;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.hero-dashboard h1{
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+.hero-dashboard p{
+    max-width:600px;
+    line-height:1.6;
+    opacity:.9;
+}
+
+.hero-icon{
+    font-size:80px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-bottom:25px;
+}
+
+.stat-card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:22px;
+}
+
+.stat-card .icon{
+    font-size:25px;
+    margin-bottom:15px;
+}
+
+.stat-card h3{
+    font-size:27px;
+    color:var(--dark);
+}
+
+.stat-card p{
+    color:var(--muted);
+    font-size:13px;
+    margin-top:4px;
+}
+
+.quick-actions{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.quick-card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:25px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.quick-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 12px 30px rgba(0,70,40,.08);
+}
+
+.quick-card h3{
+    margin:12px 0 7px;
+}
+
+.quick-card p{
+    color:var(--muted);
+    font-size:14px;
+    line-height:1.5;
+}
+
+/* ================================
+   CARDS
+================================ */
+
+.panel{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:28px;
+    margin-bottom:20px;
+}
+
+.grid-2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.grid-3{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.food-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.food-card{
+    border:2px solid var(--border);
+    border-radius:15px;
+    padding:20px;
+    cursor:pointer;
+    text-align:center;
+    transition:.2s;
+    background:white;
+}
+
+.food-card:hover{
+    border-color:#6bd49a;
+}
+
+.food-card.selected{
+    border-color:var(--green);
+    background:#effaf4;
+}
+
+.food-icon{
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+.food-card h3{
+    font-size:15px;
+    margin-bottom:5px;
+}
+
+.food-card p{
+    font-size:12px;
+    color:var(--muted);
+}
+
+.quantity-box{
+    margin-top:25px;
+    max-width:400px;
+}
+
+.quantity-box input{
+    width:100%;
+    padding:14px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    margin-top:7px;
+}
+
+.action-row{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    margin-top:25px;
+}
+
+.btn{
+    padding:13px 22px;
+    border-radius:10px;
+    border:0;
+    cursor:pointer;
+    font-weight:700;
+}
+
+.btn-primary{
+    background:var(--green);
+    color:white;
+}
+
+.btn-secondary{
+    background:#eaf5ef;
+    color:var(--green);
+}
+
+/* ================================
+   REQUIREMENTS
+================================ */
+
+.requirement-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.requirement{
+    background:#fbfdfc;
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:20px;
+}
+
+.requirement label{
+    font-weight:700;
+    display:block;
+    margin-bottom:8px;
+}
+
+.requirement input,
+.requirement select{
+    width:100%;
+    padding:13px;
+    border:1px solid var(--border);
+    border-radius:9px;
+}
+
+.checkbox-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:10px;
+}
+
+/* ================================
+   AI ANALYSIS
+================================ */
+
+.ai-box{
+    text-align:center;
+    background:linear-gradient(135deg,#eafaf1,#ffffff);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:50px 30px;
+}
+
+.ai-circle{
+    width:90px;
+    height:90px;
+    margin:0 auto 20px;
+    border-radius:50%;
+    background:#dff6e8;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:42px;
+}
+
+.loading{
+    display:none;
+    margin-top:20px;
+    color:var(--green);
+    font-weight:700;
+}
+
+/* ================================
+   RESULTS
+================================ */
+
+.result-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.recommendation{
+    border:2px solid var(--green2);
+    background:#f0fbf5;
+}
+
+.pack-card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:17px;
+    padding:23px;
+    position:relative;
+}
+
+.pack-card.best{
+    border:2px solid var(--green2);
+}
+
+.best-tag{
+    position:absolute;
+    right:15px;
+    top:15px;
+    background:var(--green);
+    color:white;
+    font-size:11px;
+    padding:6px 9px;
+    border-radius:20px;
+}
+
+.pack-card h3{
+    color:var(--dark);
+    margin-bottom:8px;
+}
+
+.pack-card .material{
+    color:var(--green);
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.pack-stat{
+    display:flex;
+    justify-content:space-between;
+    padding:9px 0;
+    border-bottom:1px solid #edf3ef;
+    font-size:13px;
+}
+
+.pack-stat span:last-child{
+    font-weight:700;
+}
+
+.recommendation-banner{
+    background:#08783f;
+    color:white;
+    border-radius:17px;
+    padding:23px;
+    margin-top:20px;
+}
+
+.recommendation-banner h3{
+    margin-bottom:7px;
+}
+
+/* ================================
+   IMPACT
+================================ */
+
+.impact-card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:25px;
+    text-align:center;
+}
+
+.impact-number{
+    font-size:36px;
+    color:var(--green);
+    font-weight:800;
+    margin:10px 0;
+}
+
+.progress{
+    height:9px;
+    background:#e6eee9;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:12px;
+}
+
+.progress div{
+    height:100%;
+    width:80%;
+    background:var(--green2);
+}
+
+/* ================================
+   REWARDS
+================================ */
+
+.reward-hero{
+    background:linear-gradient(135deg,#fff9df,#ffffff);
+    border:1px solid #f1df9c;
+    border-radius:20px;
+    padding:30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.points{
+    font-size:40px;
+    font-weight:800;
+    color:#b57a00;
+}
+
+.upload-box{
+    border:2px dashed #a8cdb8;
+    border-radius:18px;
+    padding:45px;
+    text-align:center;
+    background:#fbfefc;
+}
+
+.upload-box input{
+    margin:20px 0;
+}
+
+.reward-message{
+    display:none;
+    margin-top:20px;
+    padding:15px;
+    background:#e5f8ed;
+    color:var(--green);
+    border-radius:10px;
+    font-weight:700;
+}
+
+/* ================================
+   TOAST
+================================ */
+
+.toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:#073d27;
+    color:white;
+    padding:15px 20px;
+    border-radius:10px;
+    display:none;
+    z-index:100;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media(max-width:1000px){
+
+    .auth-left{
+        display:none;
+    }
+
+    .auth-right{
+        width:100%;
+    }
+
+    .sidebar{
+        width:210px;
+    }
+
+    .main{
+        margin-left:210px;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .food-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .grid-3{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:700px){
+
+    .sidebar{
+        position:relative;
+        width:100%;
+        height:auto;
+    }
+
+    .main{
+        margin-left:0;
+    }
+
+    .app{
+        display:none;
+    }
+
+    .sidebar{
+        display:none;
+    }
+
+    .screen{
+        padding:20px;
+    }
+
+    .grid-2,
+    .requirement-grid{
+        grid-template-columns:1fr;
+    }
+
+    .stats,
+    .quick-actions{
+        grid-template-columns:1fr;
+    }
+
+    .food-grid{
+        grid-template-columns:1fr 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     AUTHENTICATION
+===================================================== -->
+
+<section class="auth-screen" id="authScreen">
+
+    <div class="auth-left">
+
+        <div class="brand">
+            <div class="logo">📦</div>
+            PackGenie
+        </div>
+
+        <h1>
+            Right Food.<br>
+            <span>Right Pack.</span><br>
+            Right Choice.
+        </h1>
+
+        <p>
+            An AI-powered packaging recommendation platform that helps
+            restaurants, organisations and homemakers choose the right
+            packaging for every food product.
+        </p>
+
+        <div class="features">
+            <div class="feature">🤖 AI Recommendation</div>
+            <div class="feature">🌱 Sustainability</div>
+            <div class="feature">💰 Cost Comparison</div>
+            <div class="feature">🏆 Reward System</div>
+        </div>
+
+    </div>
+
+    <div class="auth-right">
+
+        <div class="auth-card">
+
+            <h2 id="authTitle">Welcome Back</h2>
+
+            <p class="sub" id="authSubtitle">
+                Sign in to continue to PackGenie
+            </p>
+
+            <div class="auth-tabs">
+
+                <button
+                    id="loginTab"
+                    class="active"
+                    onclick="showLogin()">
+                    Login
+                </button>
+
+                <button
+                    id="registerTab"
+                    onclick="showRegister()">
+                    Create Account
+                </button>
+
+            </div>
+
+            <!-- LOGIN -->
+
+            <div id="loginForm">
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input
+                        type="email"
+                        id="loginEmail"
+                        placeholder="Enter your email">
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="Enter password">
+                </div>
+
+                <button class="primary-btn" onclick="loginUser()">
+                    Login to PackGenie →
+                </button>
+
+            </div>
+
+            <!-- REGISTER -->
+
+            <div id="registerForm" style="display:none">
+
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input
+                        type="text"
+                        id="registerName"
+                        placeholder="Enter your name">
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input
+                        type="email"
+                        id="registerEmail"
+                        placeholder="Enter your email">
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input
+                        type="password"
+                        id="registerPassword"
+                        placeholder="Create password">
+                </div>
+
+                <div class="form-group">
+                    <label>User Type</label>
+
+                    <select id="userType">
+                        <option>Restaurant</option>
+                        <option>Organisation</option>
+                        <option>Homemaker</option>
+                        <option>Food Business</option>
+                    </select>
+                </div>
+
+                <button class="primary-btn" onclick="registerUser()">
+                    Create PackGenie Account →
+                </button>
+
+            </div>
+
+            <div class="demo-note">
+                Prototype login — no real account is created.
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     APPLICATION
+===================================================== -->
+
+<div class="app" id="app">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-brand">
+            <div class="logo">📦</div>
+            <span>PackGenie</span>
+        </div>
+
+        <div class="menu-title">Main Menu</div>
+
+        <button class="nav-btn active"
+                onclick="openScreen('dashboard',this)">
+            🏠 Dashboard
+        </button>
+
+        <button class="nav-btn"
+                onclick="openScreen('food',this)">
+            🍱 Food Selection
+        </button>
+
+        <button class="nav-btn"
+                onclick="openScreen('requirements',this)">
+            ⚙️ Requirements
+        </button>
+
+        <button class="nav-btn"
+                onclick="openScreen('analysis',this)">
+            🤖 AI Analysis
+        </button>
+
+        <button class="nav-btn"
+                onclick="openScreen('recommendation',this)">
+            📦 Recommendation
+        </button>
+
+        <button class="nav-btn"
+                onclick="openScreen('impact',this)">
+            🌱 Impact
+        </button>
+
+        <button class="nav-btn"
+                onclick="openScreen('rewards',this)">
+            🏆 Rewards
+        </button>
+
+        <button class="nav-btn logout"
+                onclick="logoutUser()">
+            🚪 Logout
+        </button>
+
+    </aside>
+
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div class="topbar-title" id="topTitle">
+                Dashboard
+            </div>
+
+            <div class="user-box">
+
+                <div>
+                    <span id="userName">PackGenie User</span>
+                </div>
+
+                <div class="avatar" id="avatar">
+                    PG
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             DASHBOARD
+        ================================================== -->
+
+        <section class="screen active" id="dashboard">
+
+            <div class="hero-dashboard">
+
+                <div>
+                    <h1>Smart Packaging Starts Here.</h1>
+
+                    <p>
+                        Select your food, enter its requirements,
+                        and let PackGenie identify packaging that
+                        balances freshness, cost and sustainability.
+                    </p>
+
+                    <button
+                        class="btn"
+                        style="background:white;color:#08783f;margin-top:20px"
+                        onclick="openScreen('food')">
+                        Start Packaging Analysis →
+                    </button>
+                </div>
+
+                <div class="hero-icon">
+                    📦
+                </div>
+
+            </div>
+
+
+            <div class="stats">
+
+                <div class="stat-card">
+                    <div class="icon">🍱</div>
+                    <h3>24</h3>
+                    <p>Foods Analysed</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="icon">📦</div>
+                    <h3>18</h3>
+                    <p>Recommendations</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="icon">🌱</div>
+                    <h3>32 kg</h3>
+                    <p>Packaging Waste Avoided</p>
+                </div>
+
+                <div class="stat-card">
+                    <div class="icon">🏆</div>
+                    <h3 id="dashboardPoints">250</h3>
+                    <p>Reward Points</p>
+                </div>
+
+            </div>
+
+
+            <h2 style="margin-bottom:15px">
+                Quick Actions
+            </h2>
+
+            <div class="quick-actions">
+
+                <div class="quick-card"
+                     onclick="openScreen('food')">
+
+                    <div style="font-size:32px">🍱</div>
+
+                    <h3>Choose Food</h3>
+
+                    <p>
+                        Select a food product from the PackGenie
+                        food database.
+                    </p>
+
+                </div>
+
+
+                <div class="quick-card"
+                     onclick="openScreen('analysis')">
+
+                    <div style="font-size:32px">🤖</div>
+
+                    <h3>AI Analyzer</h3>
+
+                    <p>
+                        Match food properties with packaging
+                        requirements.
+                    </p>
+
+                </div>
+
+
+                <div class="quick-card"
+                     onclick="openScreen('rewards')">
+
+                    <div style="font-size:32px">🏆</div>
+
+                    <h3>Earn Rewards</h3>
+
+                    <p>
+                        Upload your packed-food photo and earn
+                        PackGenie points.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             FOOD SELECTION
+        ================================================== -->
+
+        <section class="screen" id="food">
+
+            <div class="page-heading">
+
+                <h1>Select Your Food</h1>
+
+                <p>
+                    Choose a food product from the PackGenie database.
+                </p>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="food-grid">
+
+                    <div class="food-card"
+                         onclick="selectFood(this,'Potato Chips')">
+
+                        <div class="food-icon">🥔</div>
+                        <h3>Potato Chips</h3>
+                        <p>High moisture & oxygen sensitivity</p>
+
+                    </div>
+
+
+                    <div class="food-card"
+                         onclick="selectFood(this,'Biscuits')">
+
+                        <div class="food-icon">🍪</div>
+                        <h3>Biscuits</h3>
+                        <p>Needs moisture protection</p>
+
+                    </div>
+
+
+                    <div class="food-card"
+                         onclick="selectFood(this,'Bread')">
+
+                        <div class="food-icon">🍞</div>
+                        <h3>Bread</h3>
+                        <p>Freshness & oxygen control</p>
+
+                    </div>
+
+
+                    <div class="food-card"
+                         onclick="selectFood(this,'Pickle')">
+
+                        <div class="food-icon">🥒</div>
+                        <h3>Pickle</h3>
+                        <p>Acidic & moisture sensitive</p>
+
+                    </div>
+
+
+                    <div class="food-card"
+                         onclick="selectFood(this,'Cooked Rice')">
+
+                        <div class="food-icon">🍚</div>
+                        <h3>Cooked Rice</h3>
+                        <p>Moisture & contamination control</p>
+
+                    </div>
+
+
+                    <div class="food-card"
+                         onclick="selectFood(this,'Cut Fruits')">
+
+                        <div class="food-icon">🍎</div>
+                        <h3>Cut Fruits</h3>
+                        <p>Freshness & ventilation</p>
+
+                    </div>
+
+
+                    <div class="food-card"
+                         onclick="selectFood(this,'Spices')">
+
+                        <div class="food-icon">🌶️</div>
+                        <h3>Spices</h3>
+                        <p>Moisture & aroma protection</p>
+
+                    </div>
+
+
+                    <div class="food-card"
+                         onclick="selectFood(this,'Dry Snacks')">
+
+                        <div class="food-icon">🥨</div>
+                        <h3>Dry Snacks</h3>
+                        <p>Moisture barrier required</p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="quantity-box">
+
+                    <label>
+                        <strong>Quantity Required</strong>
+                    </label>
+
+                    <input
+                        type="number"
+                        id="quantity"
+                        min="1"
+                        value="10"
+                        placeholder="Enter quantity in kg">
+
+                </div>
+
+
+                <div class="action-row">
+
+                    <button class="btn btn-secondary"
+                            onclick="openScreen('dashboard')">
+                        ← Back
+                    </button>
+
+                    <button class="btn btn-primary"
+                            onclick="saveFood()">
+                        Continue →
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             REQUIREMENTS
+        ================================================== -->
+
+        <section class="screen" id="requirements">
+
+            <div class="page-heading">
+
+                <h1>Food Requirements</h1>
+
+                <p>
+                    Tell PackGenie what your food needs from its packaging.
+                </p>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="requirement-grid">
+
+                    <div class="requirement">
+
+                        <label>
+                            Moisture Sensitivity
+                        </label>
+
+                        <select id="moisture">
+                            <option>Low</option>
+                            <option selected>Medium</option>
+                            <option>High</option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="requirement">
+
+                        <label>
+                            Required Shelf Life
+                        </label>
+
+                        <select id="shelfLife">
+                            <option>1–3 Days</option>
+                            <option selected>1–2 Weeks</option>
+                            <option>1–3 Months</option>
+                            <option>3+ Months</option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="requirement">
+
+                        <label>
+                            Storage Temperature
+                        </label>
+
+                        <select id="temperature">
+                            <option>Room Temperature</option>
+                            <option>Refrigerated</option>
+                            <option>Frozen</option>
+                            <option>Hot Storage</option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="requirement">
+
+                        <label>
+                            Transport Condition
+                        </label>
+
+                        <select id="transport">
+                            <option>Local / Short Distance</option>
+                            <option>Long Distance</option>
+                            <option>Cold Chain</option>
+                            <option>Rough Handling</option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="requirement">
+
+                        <label>
+                            Maximum Packaging Cost / kg
+                        </label>
+
+                        <input
+                            type="number"
+                            id="costLimit"
+                            value="8"
+                            min="1">
+
+                    </div>
+
+
+                    <div class="requirement">
+
+                        <label>
+                            Sustainability Priority
+                        </label>
+
+                        <select id="sustainability">
+                            <option>Normal</option>
+                            <option selected>High</option>
+                            <option>Very High</option>
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="action-row">
+
+                    <button class="btn btn-secondary"
+                            onclick="openScreen('food')">
+                        ← Back
+                    </button>
+
+                    <button class="btn btn-primary"
+                            onclick="saveRequirements()">
+                        Analyze Packaging →
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             AI ANALYSIS
+        ================================================== -->
+
+        <section class="screen" id="analysis">
+
+            <div class="page-heading">
+
+                <h1>AI Packaging Analysis</h1>
+
+                <p>
+                    PackGenie matches your food requirements with
+                    packaging properties.
+                </p>
+
+            </div>
+
+
+            <div class="ai-box">
+
+                <div class="ai-circle">
+                    🤖
+                </div>
+
+                <h2>
+                    Ready to Analyze
+                </h2>
+
+                <p style="margin-top:10px;color:#6b7c73">
+                    Our prototype engine will evaluate barrier,
+                    freshness, cost and sustainability factors.
+                </p>
+
+                <button
+                    class="btn btn-primary"
+                    style="margin-top:25px"
+                    onclick="runAnalysis()">
+                    Run AI Packaging Analysis
+                </button>
+
+                <div class="loading" id="loading">
+                    🔄 Analyzing food properties and packaging materials...
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             RECOMMENDATION
+        ================================================== -->
+
+        <section class="screen" id="recommendation">
+
+            <div class="page-heading">
+
+                <h1>Packaging Recommendation</h1>
+
+                <p>
+                    Compare suitable packaging options for your selected food.
+                </p>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="result-header">
+
+                    <div>
+                        <strong>Selected Food:</strong>
+                        <span id="resultFood">
+                            Potato Chips
+                        </span>
+                    </div>
+
+                    <div>
+                        <strong>Quantity:</strong>
+                        <span id="resultQuantity">
+                            10 kg
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div class="grid-3" id="packagingResults">
+
+                    <!-- JS INSERTS RESULTS -->
+
+                </div>
+
+
+                <div class="recommendation-banner">
+
+                    <h3>
+                        🤖 PackGenie Recommended Choice
+                    </h3>
+
+                    <p id="recommendationText">
+                        Run the AI analysis to generate a recommendation.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             IMPACT
+        ================================================== -->
+
+        <section class="screen" id="impact">
+
+            <div class="page-heading">
+
+                <h1>Environmental & Business Impact</h1>
+
+                <p>
+                    See how the recommended packaging can create measurable impact.
+                </p>
+
+            </div>
+
+
+            <div class="grid-3">
+
+                <div class="impact-card">
+
+                    <div style="font-size:35px">
+                        🍽️
+                    </div>
+
+                    <h3>Food Waste Reduction</h3>
+
+                    <div class="impact-number">
+                        24%
+                    </div>
+
+                    <p>
+                        Estimated reduction through better freshness protection.
+                    </p>
+
+                    <div class="progress">
+                        <div style="width:78%"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="impact-card">
+
+                    <div style="font-size:35px">
+                        ♻️
+                    </div>
+
+                    <h3>Packaging Waste</h3>
+
+                    <div class="impact-number">
+                        18%
+                    </div>
+
+                    <p>
+                        Potential packaging material reduction.
+                    </p>
+
+                    <div class="progress">
+                        <div style="width:60%"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="impact-card">
+
+                    <div style="font-size:35px">
+                        💰
+                    </div>
+
+                    <h3>Cost Efficiency</h3>
+
+                    <div class="impact-number">
+                        15%
+                    </div>
+
+                    <p>
+                        Potential savings from selecting the right pack.
+                    </p>
+
+                    <div class="progress">
+                        <div style="width:65%"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel" style="margin-top:25px">
+
+                <h2 style="margin-bottom:12px">
+                    🌱 Sustainability Score
+                </h2>
+
+                <p style="color:#6b7c73">
+                    PackGenie evaluates material efficiency, recyclability,
+                    food protection and packaging quantity.
+                </p>
+
+                <div style="font-size:50px;font-weight:800;color:#08783f;margin-top:15px">
+                    8.7 / 10
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             REWARDS
+        ================================================== -->
+
+        <section class="screen" id="rewards">
+
+            <div class="page-heading">
+
+                <h1>PackGenie Rewards</h1>
+
+                <p>
+                    Show how you use better packaging and earn points.
+                </p>
+
+            </div>
+
+
+            <div class="reward-hero">
+
+                <div>
+
+                    <h2>
+                        Your PackGenie Points
+                    </h2>
+
+                    <p style="margin-top:7px;color:#756b4e">
+                        Keep making sustainable packaging choices.
+                    </p>
+
+                </div>
+
+                <div class="points" id="rewardPoints">
+                    250
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="upload-box">
+
+                    <div style="font-size:55px">
+                        📸
+                    </div>
+
+                    <h2 style="margin-top:10px">
+                        Upload Packed Food Photo
+                    </h2>
+
+                    <p style="color:#6b7c73;margin-top:8px">
+                        Upload a photo of your food packed using
+                        your recommended packaging.
+                    </p>
+
+                    <input
+                        type="file"
+                        id="foodPhoto"
+                        accept="image/*">
+
+                    <br>
+
+                    <button
+                        class="btn btn-primary"
+                        onclick="submitReward()">
+                        Submit & Earn 50 Points
+                    </button>
+
+                    <div
+                        class="reward-message"
+                        id="rewardMessage">
+                        🎉 Great work! 50 points added to your account.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+/* =====================================================
+   GLOBAL DATA
+===================================================== */
+
+let selectedFood = "";
+let selectedQuantity = 10;
+let rewardPoints = 250;
+
+
+/* =====================================================
+   AUTH
+===================================================== */
+
+function showLogin(){
+
+    document.getElementById("loginForm").style.display="block";
+    document.getElementById("registerForm").style.display="none";
+
+    document.getElementById("loginTab").classList.add("active");
+    document.getElementById("registerTab").classList.remove("active");
+
+    document.getElementById("authTitle").innerText="Welcome Back";
+    document.getElementById("authSubtitle").innerText=
+        "Sign in to continue to PackGenie";
+}
+
+
+function showRegister(){
+
+    document.getElementById("loginForm").style.display="none";
+    document.getElementById("registerForm").style.display="block";
+
+    document.getElementById("loginTab").classList.remove("active");
+    document.getElementById("registerTab").classList.add("active");
+
+    document.getElementById("authTitle").innerText="Create Account";
+    document.getElementById("authSubtitle").innerText=
+        "Join PackGenie and make smarter packaging choices";
+}
+
+
+function loginUser(){
+
+    const email=document.getElementById("loginEmail").value;
+    const password=document.getElementById("loginPassword").value;
+
+    if(!email || !password){
+
+        showToast("Please enter email and password.");
+
+        return;
+    }
+
+    let name=email.split("@")[0];
+
+    document.getElementById("userName").innerText=name;
+
+    document.getElementById("avatar").innerText=
+        name.substring(0,2).toUpperCase();
+
+    enterApp();
+
+    showToast("Welcome back to PackGenie!");
+
+}
+
+
+function registerUser(){
+
+    const name=document.getElementById("registerName").value;
+    const email=document.getElementById("registerEmail").value;
+    const password=document.getElementById("registerPassword").value;
+
+    if(!name || !email || !password){
+
+        showToast("Please complete all fields.");
+
+        return;
+    }
+
+    document.getElementById("userName").innerText=name;
+
+    document.getElementById("avatar").innerText=
+        name.substring(0,2).toUpperCase();
+
+    enterApp();
+
+    showToast("Account created successfully!");
+
+}
+
+
+function enterApp(){
+
+    document.getElementById("authScreen").style.display="none";
+
+    document.getElementById("app").style.display="block";
+
+    openScreen("dashboard");
+
+}
+
+
+function logoutUser(){
+
+    document.getElementById("app").style.display="none";
+
+    document.getElementById("authScreen").style.display="flex";
+
+    showLogin();
+
+    showToast("Logged out successfully.");
+
+}
+
+
+/* =====================================================
+   SCREEN NAVIGATION
+===================================================== */
+
+function openScreen(screenId,button=null){
+
+    document.querySelectorAll(".screen")
+        .forEach(screen=>{
+            screen.classList.remove("active");
+        });
+
+    const screen=document.getElementById(screenId);
+
+    if(screen){
+        screen.classList.add("active");
+    }
+
+
+    document.querySelectorAll(".nav-btn")
+        .forEach(btn=>{
+            btn.classList.remove("active");
+        });
+
+    if(button){
+        button.classList.add("active");
+    }
+
+    const titles={
+        dashboard:"Dashboard",
+        food:"Food Selection",
+        requirements:"Food Requirements",
+        analysis:"AI Packaging Analysis",
+        recommendation:"Packaging Recommendation",
+        impact:"Environmental Impact",
+        rewards:"PackGenie Rewards"
+    };
+
+    document.getElementById("topTitle").innerText=
+        titles[screenId] || "PackGenie";
+
+    window.scrollTo(0,0);
+}
+
+
+/* =====================================================
+   FOOD
+===================================================== */
+
+function selectFood(card,food){
+
+    document.querySelectorAll(".food-card")
+        .forEach(item=>{
+            item.classList.remove("selected");
+        });
+
+    card.classList.add("selected");
+
+    selectedFood=food;
+
+    showToast(food+" selected.");
+}
+
+
+function saveFood(){
+
+    if(!selectedFood){
+
+        showToast("Please select a food first.");
+
+        return;
+    }
+
+    const quantity=
+        Number(document.getElementById("quantity").value);
+
+    if(quantity<=0){
+
+        showToast("Please enter a valid quantity.");
+
+        return;
+    }
+
+    selectedQuantity=quantity;
+
+    document.getElementById("resultFood").innerText=
+        selectedFood;
+
+    document.getElementById("resultQuantity").innerText=
+        quantity+" kg";
+
+    openScreen("requirements");
+
+    showToast("Food details saved.");
+
+}
+
+
+/* =====================================================
+   REQUIREMENTS
+===================================================== */
+
+function saveRequirements(){
+
+    if(!selectedFood){
+
+        showToast("Please select food first.");
+
+        openScreen("food");
+
+        return;
+    }
+
+    openScreen("analysis");
+
+    showToast("Requirements saved. Ready for AI analysis.");
+
+}
+
+
+/* =====================================================
+   AI ANALYSIS
+===================================================== */
+
+function runAnalysis(){
+
+    const loading=
+        document.getElementById("loading");
+
+    loading.style.display="block";
+
+    setTimeout(()=>{
+
+        loading.style.display="none";
+
+        generateRecommendations();
+
+        openScreen("recommendation");
+
+        showToast("AI packaging analysis completed.");
+
+    },1500);
+
+}
+
+
+/* =====================================================
+   PACKAGING ENGINE
+===================================================== */
+
+function generateRecommendations(){
+
+    let best;
+    let food=selectedFood;
+
+    const data={
+
+        "Potato Chips":{
+            name:"High-Barrier Pouch",
+            material:"Multi-layer Food Grade Film",
+            cost:5.20,
+            shelf:"+18%",
+            barrier:"Very High",
+            eco:"7.8 / 10"
+        },
+
+        "Biscuits":{
+            name:"Moisture-Barrier Pouch",
+            material:"Food Grade Laminated Film",
+            cost:5.00,
+            shelf:"+19%",
+            barrier:"High",
+            eco:"8.1 / 10"
+        },
+
+        "Bread":{
+            name:"Modified Atmosphere Pack",
+            material:"Food Grade MAP Film",
+            cost:6.10,
+            shelf:"+21%",
+            barrier:"High",
+            eco:"7.9 / 10"
+        },
+
+        "Pickle":{
+            name:"Food-Grade Glass Jar",
+            material:"Reusable Glass",
+            cost:8.40,
+            shelf:"+25%",
+            barrier:"Very High",
+            eco:"9.3 / 10"
+        },
+
+        "Cooked Rice":{
+            name:"Retort Pouch",
+            material:"Heat Resistant Food Film",
+            cost:6.80,
+            shelf:"+27%",
+            barrier:"Very High",
+            eco:"8.2 / 10"
+        },
+
+        "Cut Fruits":{
+            name:"Ventilated Food Tray",
+            material:"Food Grade Tray + Film",
+            cost:4.80,
+            shelf:"+23%",
+            barrier:"Medium",
+            eco:"8.8 / 10"
+        },
+
+        "Spices":{
+            name:"High-Barrier Laminated Pouch",
+            material:"Aroma & Moisture Barrier Film",
+            cost:4.90,
+            shelf:"+20%",
+            barrier:"Very High",
+            eco:"8.0 / 10"
+        },
+
+        "Dry Snacks":{
+            name:"Moisture-Barrier Pouch",
+            material:"Food Grade Barrier Film",
+            cost:5.00,
+            shelf:"+19%",
+            barrier:"High",
+            eco:"8.2 / 10"
+        }
+
+    };
+
+
+    best=data[food] || data["Potato Chips"];
+
+
+    let option2={
+        name:"Paper-Based Pack",
+        material:"Recyclable Paper Composite",
+        cost:4.20,
+        shelf:"+15%",
+        barrier:"Medium",
+        eco:"9.1 / 10"
+    };
+
+
+    let option3={
+        name:"Reusable Container",
+        material:"Reusable Food Container",
+        cost:7.50,
+        shelf:"+20%",
+        barrier:"Medium",
+        eco:"9.5 / 10"
+    };
+
+
+    document.getElementById("packagingResults").innerHTML=
+        createPackCard(best,true)+
+        createPackCard(option2,false)+
+        createPackCard(option3,false);
+
+
+    const totalCost=
+        (best.cost*selectedQuantity).toFixed(2);
+
+
+    document.getElementById("recommendationText").innerHTML=
+        "For <strong>"+food+"</strong>, PackGenie recommends "+
+        "<strong>"+best.name+"</strong>. "+
+        "Estimated packaging cost for "+selectedQuantity+
+        " kg: <strong>₹"+totalCost+
+        "</strong>. This option provides "+best.shelf+
+        " estimated shelf-life improvement with a "+
+        best.barrier.toLowerCase()+" barrier.";
+}
+
+
+function createPackCard(pack,best){
+
+    return `
+
+        <div class="pack-card ${best ? "best":""}">
+
+            ${best ?
+                '<div class="best-tag">AI RECOMMENDED</div>'
+                :
+                ''
+            }
+
+            <h3>${pack.name}</h3>
+
+            <div class="material">
+                ${pack.material}
+            </div>
+
+            <div class="pack-stat">
+                <span>Cost / kg</span>
+                <span>₹${pack.cost.toFixed(2)}</span>
+            </div>
+
+            <div class="pack-stat">
+                <span>Shelf-life improvement</span>
+                <span>${pack.shelf}</span>
+            </div>
+
+            <div class="pack-stat">
+                <span>Barrier</span>
+                <span>${pack.barrier}</span>
+            </div>
+
+            <div class="pack-stat">
+                <span>Eco Score</span>
+                <span>${pack.eco}</span>
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   REWARDS
+===================================================== */
+
+function submitReward(){
+
+    const file=
+        document.getElementById("foodPhoto").files[0];
+
+    if(!file){
+
+        showToast("Please upload a food packaging photo.");
+
+        return;
+    }
+
+    rewardPoints += 50;
+
+    document.getElementById("rewardPoints").innerText=
+        rewardPoints;
+
+    document.getElementById("dashboardPoints").innerText=
+        rewardPoints;
+
+    document.getElementById("rewardMessage").style.display=
+        "block";
+
+    showToast("+50 PackGenie points earned!");
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(message){
+
+    const toast=document.getElementById("toast");
+
+    toast.innerText=message;
+
+    toast.style.display="block";
+
+    setTimeout(()=>{
+
+        toast.style.display="none";
+
+    },2500);
+
+}
+
+</script>
+
+</body>
+</html>
